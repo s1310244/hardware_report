@@ -114,6 +114,7 @@ After considering timing, we confirmed that there was a delay of around 15,000ps
 
 ## Post place and route simulation
 the result of simulation  
+<img width="1907" height="785" alt="image" src="https://github.com/user-attachments/assets/6b0b323d-6c2d-46b7-b57d-e4c0877deddc" />
 
 ## Macro
 

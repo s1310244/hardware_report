@@ -236,10 +236,5 @@ Layout when the above code is added to line 23 of top_basic.tcl and executed aga
 
    "By placing the macro first, we can avoid routing the power rails (VDD and VSS nets)."
 
-## Power estimation
-Important Concepts  
-Static power: also called leakage power. This kind of power consumption is due to the leakage current in the CMOS transistor. From 45nm downward, this type of static power has become more dominant than dynamic power.  
-Dynamic power: this power caused due to switching activity. Some CAD tools even separate into internal and dynamic power.  
 
-the descripStatic power
 

@@ -232,9 +232,52 @@ placeInstance \TSV_GEN[6].TSV0 20 25
 placeInstance \TSV_GEN[7].TSV0 20 30
 ```
 Layout when the above code is added to line 23 of top_basic.tcl and executed again  
+
 <img width="1066" height="821" alt="image" src="https://github.com/user-attachments/assets/aee813c8-46eb-460e-a8b7-d56c77d30b89" />  
 
    "By placing the macro first, we can avoid routing the power rails (VDD and VSS nets)."
+  
+## Power estimation
+### Concepts  
+Static power: also called leakage power. This kind of power consumption is due to the leakage current in the CMOS transistor. From 45nm downward, this type of static power has become more dominant than dynamic power.  
+Dynamic power: this power caused due to switching activity. Some CAD tools even separate into internal and dynamic power.  
 
+the dynamic power consumption (which may take a major part) depends on the activities:  
+   Internal power:  
+      When the input of a gate rises from 0 to 1 (VDD), it consumes some power.  
+      When the input of a gate reduces from 1 to 0 (Ground), it consumes some power.  
+   Pure dynamic power:  
+      Once the inputs change, for instance:  
+         An AND gate of two inputs.  
+         Previously the inputs were 0 and 0.    
+         The new inputs are 1 and 1.  
+         The output now changes from 0 to 1.  
+         The change of output gonna consume some power  
+Because this dynamic power depends on the switching activities, we need to evaluate it based on the actual inputs.  
 
+why timing
+glitch -> need timing simulation  
+->  the output can be temporarily changed a bit. This change will consume power
+
+VCD file: VCD (Value Change Dump) is the format for the waveform. In the basic tutorial, we did mention about it. You can export a VCD file and store it for viewing later.  
+SAIF file: switching activity file. Instead of a waveform, this file consists of the number of switching times per simulation  
+
+Export VCD file  
+Method 1: using $dumpvcd
+By adding the following 
+For example
+```
+$dumpfile("detector110.vcd");
+$dumpvars(0, detector110_tester);
+```
+The first line is the file name. The second line is to dump the testbench.  
+Method 2: using Modelsim syntax  
+Use the following syntax (after vsim)
+For example,
+
+```
+vcd file detector110_vsim.vcd
+vcd add -r /detector110_tester/UUT/*
+```
+The first line is to indicate the vcd file. The second line indicates the module to be dumped into that VCD file  
 

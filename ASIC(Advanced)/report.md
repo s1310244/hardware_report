@@ -263,21 +263,64 @@ VCD file: VCD (Value Change Dump) is the format for the waveform. In the basic t
 SAIF file: switching activity file. Instead of a waveform, this file consists of the number of switching times per simulation  
 
 Export VCD file  
-Method 1: using $dumpvcd
-By adding the following 
-For example
-```
-$dumpfile("detector110.vcd");
-$dumpvars(0, detector110_tester);
-```
-The first line is the file name. The second line is to dump the testbench.  
-Method 2: using Modelsim syntax  
-Use the following syntax (after vsim)
-For example,
+   Method 1: using $dumpvcd
+   By adding the following 
+   For example
+   ```
+   $dumpfile("detector110.vcd");
+   $dumpvars(0, detector110_tester);
+   ```
+   The first line is the file name. The second line is to dump the testbench.  
+   Method 2: using Modelsim syntax  
+   Use the following syntax (after vsim)
+   For example,
+   ```
+   vcd file detector110_vsim.vcd
+   vcd add -r /detector110_tester/UUT/*
+   ```
+   The first line is to indicate the vcd file. The second line indicates the module to be dumped into that VCD file  
+   
+Export the SAIF file
+   To export to the SAIF file, we use the following syntax (after vsim)  
+   ```
+   power add /detector110_tester/UUT/*
+   run -all
+   power report -all -bsaif detector110.saif;
+   ```
+   The first line is to indicate the nets (wires) to the monitored. The second line is the simulation start command. The last line is to report into a file.  
 
+### Emulate power consumption
+spef (Standard Parasitic Extraction Format) file is exported  
+we copy needed source file and VCD or SAIF files 
+to prepare the environment and open Primetime.
 ```
-vcd file detector110_vsim.vcd
-vcd add -r /detector110_tester/UUT/*
+source /home/share/cad_sh/cad.sh
+pt_shell
+source power_VCD.tcl or source power_power_SAIF.tcl
 ```
-The first line is to indicate the vcd file. The second line indicates the module to be dumped into that VCD file  
+IF we run the command "source power_VCD.tcl", then I show report/power_report_detector110_net.txt.  
+<img width="832" height="803" alt="image" src="https://github.com/user-attachments/assets/d536efa9-b947-415e-a173-0c8be75a333e"/>  
+
+### No activity report
+Use the simulation script by adding -g_NOACTI=1 in the vsim
+the report is  
+<img width="829" height="800" alt="image" src="https://github.com/user-attachments/assets/f3d038c0-7534-4210-8ece-0924a04f5f69" />  
+
+the previous result compares to the result, which is no activity.
+the leakage power is quite similar.  
+we can see a significant drop in internal and switch power.  
+
+### Time-based power analysis
+In additional, important thing is the peak of the power consumption.
+To do so, we must enable the time-based power analysis by adding to the script
+```
+set power_analysis_mode time_based
+```
+we should use a VCD file to analyze since the SAIF file only measures the summary of switching activities.
+The report is 
+<img width="814" height="236" alt="image" src="https://github.com/user-attachments/assets/4785ae2f-958a-4f97-a3a3-0a69c4362e5e" />  
+<img width="814" height="236" alt="image" src="https://github.com/user-attachments/assets/df08f6a2-dcf1-4e08-9732-81e2b72511d8" />  
+  
+This is the time-based power report(the part):  
+<img width="824" height="1020" alt="image" src="https://github.com/user-attachments/assets/b4d017d6-5511-4bf1-951b-c4157d421e59" />
 

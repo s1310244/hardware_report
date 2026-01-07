@@ -334,7 +334,372 @@ Toggle Coverage      =      82.95% (146 of 176 bins)
 
 Total Coverage By Instance (filtered view): 89.09%
 ```
-There are misses.
 
-## perform synthesis and layout
 
+## perform synthesis
+The commands to use Synopsys Design Compiler  
+```
+source /home/share/cad_sh/cad.sh
+```
+  
+Copy to ./Troch25HW/dc_syn/decoder110.tcl from ./EDAS-Tool-Examples/design-compiler-synthesis/decoder110.tcl.
+decoder110.tcl file was changed for lif_neuron.v.
+```
+set search_path [concat  $search_path $TSV_PATH]
+->
+set search_path [concat $search_path $TSV_PATH "../PARAM" "../RTL"]
+```
+```
+set base_name "detector110"
+->
+set base_name "LIF_neuron"
+```
+```
+analyze -format verilog $src_folder/detector110.v
+->
+analyze -format verilog $src_folder/LIF_neuron.v
+```
+```
+define_design_lib WORK -path ./WORK
+->
+define_design_lib WORK -path ../SIM/work
+```
+  
+Create the needed folders(output_files, reports).
+the commad to run synopes design complier
+```
+dc_shell
+```
+  
+Then, run "source decoder110.tcl".
+The log is shown after running the command.
+```
+dc_shell> source decoder110.tcl
+Running PRESTO HDLC
+Compiling source file ../RTL/LIF_neuron.v
+Opening include file ../PARAM/param_common.v
+Opening include file ../PARAM/param_LIF.v
+Opening include file ../PARAM/param_LIF.v
+Presto compilation completed successfully.
+Loading db file '/home/lib/typical.db'
+Loading db file '/home/apps/vdec/Synopsys/syn/latest/libraries/syn/dw_foundation.sldb'
+Loading db file '/home/lib/TSV_lib/TSV.db'
+Loading db file '/home/apps/vdec/Synopsys/syn/latest/libraries/syn/gtech.db'
+Loading db file '/home/apps/vdec/Synopsys/syn/latest/libraries/syn/standard.sldb'
+  Loading link library 'NangateOpenCellLibrary'
+  Loading link library 'TSV'
+  Loading link library 'gtech'
+Running PRESTO HDLC
+Warning:  ../RTL/LIF_neuron.v:150: unsigned to signed assignment occurs. (VER-318)
+Warning:  ../RTL/LIF_neuron.v:156: signed to unsigned conversion occurs. (VER-318)
+Warning:  ../RTL/LIF_neuron.v:158: signed to unsigned conversion occurs. (VER-318)
+Warning:  ../RTL/LIF_neuron.v:160: signed to unsigned conversion occurs. (VER-318)
+Warning:  ../RTL/LIF_neuron.v:162: signed to unsigned part selection occurs. (VER-318)
+Warning:  ../RTL/LIF_neuron.v:181: signed to unsigned assignment occurs. (VER-318)
+Warning:  ../RTL/LIF_neuron.v:252: unsigned to signed assignment occurs. (VER-318)
+Warning:  ../RTL/LIF_neuron.v:283: signed to unsigned assignment occurs. (VER-318)
+Warning:  ../RTL/LIF_neuron.v:259: Statement unreachable (Branch condition impossible to meet).  (VER-61)
+
+Inferred memory devices in process
+        in routine LIF_neuron line 213 in file
+                '../RTL/LIF_neuron.v'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|     r_acc_V_reg     | Flip-flop |   6   |  Y  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+
+Inferred memory devices in process
+        in routine LIF_neuron line 231 in file
+                '../RTL/LIF_neuron.v'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|    r_refrac_reg     | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+
+Inferred memory devices in process
+        in routine LIF_neuron line 248 in file
+                '../RTL/LIF_neuron.v'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|   r_threshold_reg   | Flip-flop |   6   |  Y  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully. (LIF_neuron)
+Elaborated 1 design.
+Current design is now 'LIF_neuron'.
+Current design is 'LIF_neuron'.
+
+  Linking design 'LIF_neuron'
+  Using the following designs and libraries:
+  --------------------------------------------------------------------------
+  LIF_neuron                  /home/s1310244/Torch2HW/HW/dc_syn/LIF_neuron.db
+  NangateOpenCellLibrary (library) /home/lib/typical.db
+  dw_foundation.sldb (library) /home/apps/vdec/Synopsys/syn/latest/libraries/syn/dw_foundation.sldb
+  TSV (library)               /home/lib/TSV_lib/TSV.db
+
+Information: Checking out the license 'DesignWare'. (SEC-104)
+Information: Evaluating DesignWare library utilization. (UISN-27)
+
+============================================================================
+| DesignWare Building Block Library  |         Version         | Available |
+============================================================================
+| Basic DW Building Blocks           | Q-2019.12-DWBB_201912.3 |     *     |
+| Licensed DW Building Blocks        | Q-2019.12-DWBB_201912.3 |     *     |
+============================================================================
+
+
+Information: There are 4 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
+
+
+
+  Beginning Pass 1 Mapping
+  ------------------------
+  Processing 'LIF_neuron'
+
+  Updating timing information
+Information: Updating design information... (UID-85)
+
+  Beginning Implementation Selection
+  ----------------------------------
+  Mapping 'LIF_neuron_DW_cmp_0'
+  Processing 'LIF_neuron_DW01_add_0'
+  Processing 'LIF_neuron_DW01_sub_0_DW01_sub_1'
+  Processing 'LIF_neuron_DW01_add_1'
+  Mapping 'LIF_neuron_DW_mult_uns_0'
+
+  Beginning Mapping Optimizations  (High effort)
+  -------------------------------
+Information: Added key list 'DesignWare' to design 'LIF_neuron'. (DDB-72)
+Information: compile falsified 4 infeasible paths. (OPT-1720)
+  Mapping Optimization (Phase 1)
+  Mapping Optimization (Phase 2)
+  Mapping Optimization (Phase 3)
+  Mapping Optimization (Phase 4)
+  Mapping Optimization (Phase 5)
+  Mapping Optimization (Phase 6)
+
+                                  TOTAL
+   ELAPSED            WORST NEG   SETUP    DESIGN
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT
+  --------- --------- --------- --------- --------- -------------------------
+    0:00:18     312.8      0.66      13.5       0.0
+    0:00:18     306.2      0.66      13.1       0.0
+    0:00:18     306.2      0.66      13.1       0.0
+    0:00:18     306.2      0.66      13.1       0.0
+    0:00:18     306.2      0.66      13.1       0.0
+    0:00:19     299.0      0.66      13.0       0.0
+    0:00:19     299.0      0.66      13.0       0.0
+    0:00:19     299.0      0.66      13.0       0.0
+    0:00:19     299.0      0.66      13.0       0.0
+    0:00:19     299.0      0.66      13.0       0.0
+    0:00:19     299.0      0.66      13.0       0.0
+    0:00:19     299.0      0.66      13.0       0.0
+    0:00:19     299.0      0.66      13.0       0.0
+
+
+
+  Beginning Delay Optimization Phase
+  ----------------------------------
+
+                                  TOTAL
+   ELAPSED            WORST NEG   SETUP    DESIGN
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT
+  --------- --------- --------- --------- --------- -------------------------
+    0:00:19     299.0      0.66      13.0       0.0
+    0:00:19     301.9      0.65      12.8       0.0 r_acc_V_reg[3]/D
+    0:00:19     303.5      0.64      12.7       0.0 r_acc_V_reg[3]/D
+    0:00:19     307.5      0.63      12.6       0.0 r_acc_V_reg[3]/D
+    0:00:19     309.4      0.62      12.6       0.0 r_acc_V_reg[4]/D
+    0:00:19     312.5      0.61      12.5       0.0 r_acc_V_reg[2]/D
+    0:00:19     313.6      0.61      12.5       0.0 r_acc_V_reg[3]/D
+    0:00:19     318.1      0.60      12.5       0.0 r_acc_V_reg[3]/D
+    0:00:19     319.2      0.59      12.4       0.0 r_acc_V_reg[3]/D
+    0:00:19     322.7      0.59      12.3       0.0 r_acc_V_reg[4]/D
+    0:00:19     325.6      0.58      12.2       0.0 r_acc_V_reg[4]/D
+    0:00:19     329.8      0.58      12.2       0.0 r_acc_V_reg[4]/D
+    0:00:19     331.7      0.57      12.2       0.0 r_acc_V_reg[4]/D
+    0:00:20     333.0      0.57      12.2       0.0 r_acc_V_reg[4]/D
+    0:00:20     333.8      0.57      12.2       0.0 r_acc_V_reg[4]/D
+    0:00:20     334.1      0.57      12.2       0.0 r_acc_V_reg[2]/D
+    0:00:20     336.2      0.57      12.2       0.0 r_acc_V_reg[4]/D
+    0:00:20     337.3      0.57      12.2       0.0 r_acc_V_reg[4]/D
+    0:00:20     336.5      0.56      12.2       0.0 r_acc_V_reg[2]/D
+    0:00:21     337.0      0.56      12.1       0.0
+    0:00:21     333.3      0.56      12.1       0.0
+    0:00:21     332.8      0.56      12.1       0.0
+    0:00:21     333.8      0.56      12.1       0.0
+    0:00:21     334.1      0.56      12.0       0.0
+    0:00:21     335.7      0.56      12.0       0.0
+    0:00:21     335.7      0.56      12.0       0.0
+    0:00:21     336.0      0.56      12.0       0.0
+
+
+  Beginning Area-Recovery Phase  (cleanup)
+  -----------------------------
+
+                                  TOTAL
+   ELAPSED            WORST NEG   SETUP    DESIGN
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT
+  --------- --------- --------- --------- --------- -------------------------
+    0:00:21     336.0      0.56      12.0       0.0
+    0:00:21     336.0      0.56      12.0       0.0
+    0:00:21     332.2      0.56      11.9       0.0
+    0:00:21     332.2      0.56      11.9       0.0
+    0:00:21     332.2      0.56      11.9       0.0
+    0:00:21     332.2      0.56      11.9       0.0
+    0:00:21     332.2      0.56      11.9       0.0
+    0:00:21     332.0      0.56      11.9       0.0
+    0:00:21     332.0      0.56      11.9       0.0
+    0:00:21     332.0      0.56      11.9       0.0
+    0:00:21     332.0      0.56      11.9       0.0
+    0:00:21     332.0      0.56      11.9       0.0
+    0:00:21     332.0      0.56      11.9       0.0
+    0:00:22     332.0      0.56      11.9       0.0 r_acc_V_reg[4]/D
+    0:00:22     331.2      0.56      11.9       0.0
+    0:00:22     331.4      0.56      11.9       0.0
+    0:00:22     333.0      0.56      11.9       0.0
+    0:00:22     334.9      0.56      11.9       0.0
+    0:00:22     337.3      0.56      11.9       0.0
+    0:00:22     337.3      0.56      11.9       0.0
+    0:00:22     337.8      0.56      11.9       0.0 r_acc_V_reg[4]/D
+    0:00:22     341.0      0.56      11.9       0.0 r_acc_V_reg[4]/D
+    0:00:22     341.0      0.56      11.9       0.0
+Loading db file '/home/lib/typical.db'
+Loading db file '/home/lib/TSV_lib/TSV.db'
+
+
+Note: Symbol # after min delay cost means estimated hold TNS across all active scenarios
+
+
+  Optimization Complete
+  ---------------------
+Warning: "The variable 'compile_high_effort_area_in_incremental' is supported in DC NXT only. Ignoring this setting." (OPT-1726)
+
+
+  Beginning Pass 1 Mapping  (Incremental)
+  ------------------------
+
+  Updating timing information
+Information: Updating design information... (UID-85)
+
+  Beginning Mapping Optimizations  (High effort)  (Incremental)
+  -------------------------------
+
+  Beginning Incremental Implementation Selection
+  ----------------------------------------------
+Information: compile falsified 4 infeasible paths. (OPT-1720)
+
+  Beginning Delay Optimization Phase
+  ----------------------------------
+
+                                  TOTAL
+   ELAPSED            WORST NEG   SETUP    DESIGN
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT
+  --------- --------- --------- --------- --------- -------------------------
+    0:00:23     341.0      0.56      11.9       0.0
+    0:00:24     342.6      0.56      11.9       0.0 r_acc_V_reg[4]/D
+    0:00:25     343.7      0.56      11.9       0.0 r_acc_V_reg[4]/D
+    0:00:25     344.7      0.56      11.8       0.0 r_acc_V_reg[4]/D
+    0:00:25     343.7      0.56      11.8       0.0 r_acc_V_reg[2]/D
+    0:00:25     345.8      0.56      11.8       0.0 r_acc_V_reg[2]/D
+    0:00:25     346.3      0.55      11.8       0.0 r_acc_V_reg[4]/D
+    0:00:25     347.7      0.55      11.8       0.0 r_acc_V_reg[2]/D
+    0:00:25     349.3      0.55      11.8       0.0 r_acc_V_reg[1]/D
+    0:00:26     349.3      0.55      11.8       0.0
+    0:00:26     349.3      0.55      11.8       0.0
+    0:00:26     350.6      0.55      11.8       0.0
+    0:00:26     352.4      0.55      11.8       0.0
+    0:00:26     353.0      0.55      11.8       0.0
+    0:00:26     354.0      0.55      11.8       0.0
+    0:00:26     353.5      0.55      11.8       0.0
+    0:00:26     352.4      0.55      11.8       0.0
+    0:00:26     354.6      0.55      11.7       0.0
+    0:00:26     355.6      0.55      11.7       0.0
+    0:00:26     356.7      0.55      11.7       0.0
+    0:00:26     356.7      0.55      11.7       0.0
+Loading db file '/home/lib/typical.db'
+Loading db file '/home/lib/TSV_lib/TSV.db'
+
+
+Note: Symbol # after min delay cost means estimated hold TNS across all active scenarios
+
+
+  Optimization Complete
+  ---------------------
+Writing verilog file '/home/s1310244/Torch2HW/HW/dc_syn/output_files/LIF_neuron_net.v'.
+Warning: Verilog 'assign' or 'tran' statements are written out. (VO-4)
+Information: Annotated 'cell' delays are assumed to include load delay. (UID-282)
+Information: Writing timing information to file '/home/s1310244/Torch2HW/HW/dc_syn/output_files/LIF_neuron_net.sdf'. (WT-3)
+Information: Writing parasitics to file '/home/s1310244/Torch2HW/HW/dc_syn/output_files/LIF_neuron_net.spef'. (WP-3)
+Writing ddc file './output_files/LIF_neuron_net.ddc'.
+
+Memory usage for this session 99 Mbytes.
+Memory usage for this session including child processes 99 Mbytes.
+CPU usage for this session 14 seconds ( 0.00 hours ).
+Elapsed time for this session 28 seconds ( 0.01 hours ).
+
+Thank you...
+```  
+files in reports folder.
+```
+$ ls reports/
+check_design_LIF_neuron_net.txt  report_timing_LIF_neuron_net.txt
+report_area_LIF_neuron_net.txt   summary_report_LIF_neuron_net.txt
+report_power_LIF_neuron_net.txt
+```
+files in output_files folder.
+```
+$ ls output_files/
+LIF_neuron_net.ddc  LIF_neuron_net.sdf   LIF_neuron_net.v
+LIF_neuron_net.sdc  LIF_neuron_net.spef
+```
+
+## perform layout
+Copy to ./Troch25HW/layout/ from ./EDAS-Tool-Examples/design-compiler-synthesis/.
+```
+cp ../../../EDAS-Tool-Examples/place-and-route/detector110.tcl ./
+cp ../../../EDAS-Tool-Examples/place-and-route/detector110.globals ./
+cp ../../../EDAS-Tool-Examples/place-and-route/detector110.view  ./
+```
+Change a name of the files.
+```
+mv detector110.tcl lif_neuron.tcl
+mv detector110.globals lif_neuron.globals
+mv detector110.view lif_neuron.view
+```
+  
+lif_neuron.tcl file was changed for lif_neuron.v.
+```
+set model_name "detector110.v"
+->
+set model_name "LIF_neuron"
+```
+
+lif_neuron.globals file was changed for lif_neuron.v.  
+```
+set init_top_cell {detector110}
+set init_verilog {../synthesis/output_files/detector110_net.v}
+->
+set init_top_cell {LIF_neuron}
+set init_verilog {../dc_syn/output_files/LIF_neuron_net.v}
+```
+
+lif_neuron.view file was changed for lif_neuron.v.
+```
+create_constraint_mode -name timing_cons -sdc_files {../synthesis/output_files/detector110_net.sdc}
+->
+create_constraint_mode -name timing_cons -sdc_files {../dc_syn/output_files/LIF_neuron_net.sdc}
+```
+  
+the commad to run innovus.
+```
+innovus
+```
+  
+Then, run "source LIF_neuron_layout.tcl".
+the result of layout  
+<img width="1920" height="1050" alt="image" src="https://github.com/user-attachments/assets/d6e46817-536d-450a-bc56-680114c248a5" />  
+<img width="1920" height="1050" alt="image" src="https://github.com/user-attachments/assets/5901d9af-b7b6-4738-a132-855812822328" />  
+<img width="1920" height="1050" alt="image" src="https://github.com/user-attachments/assets/2746f175-9660-4c0d-b617-402a85e9f22f" />  

@@ -3,12 +3,55 @@ Try to display images(jpeg/png) on the monitor.
 
 Used FPGA :  the Basys3 card which have an ARTIX-7 FPGA chipset
 
-displayed image(jpeg): sample.jpeg  
+displayed image(jpeg): sample.jpeg (.png) 
 
 ## A module that converts jpeg and png image files to VGA format.
 ### Use python code.
+Preparation: 
+Install Pillow library.
+```
+pip install Pillow
 ```
 
+Python script
+```
+from PIL import Image
+import os
+
+input_filename = "sample.jpeg"  # Image file name to convert (PNG is also acceptable)
+output_filename = "image.mem"  # Name of file to output
+# adjust to FPGA VGA drawing scale
+target_width = 320             # width 
+target_height = 240            # height
+
+def convert_to_mem():
+    # open the image and resize the image to 320x240
+    img = Image.open(input_filename)
+    img = img.resize((target_width, target_height))
+
+    # Convert the image to RGB format
+    rgb_img = img.convert('RGB')
+
+    with open(output_filename, 'w') as f:
+        # Determine the reading order to match the address specification order of the pixels in the FPGA image
+        # From top left to top right, top right to bottom left, bottom left to bottom right
+        for y in range(target_height):
+            for x in range(target_width):
+                r, g, b = rgb_img.getpixel((x, y))
+
+                # 8bit(0-255) to 4bit(0-15) (vga format is 12bit)
+                r = r >> 4
+                g = g >> 4
+                b = b >> 4
+
+                # 12bit (RRRRGGGGBBBB)
+                pixel_val = (r << 8) | (g << 4) | b
+                
+                # Verilog's $readmemh (read memory hex) is designed to read hex text data, so it writes it as a 3-digit hex string followed by a newline.
+                f.write(f"{pixel_val:03X}\n")
+
+if __name__ == "__main__":
+    convert_to_mem()
 ```
 a generated file: image.mem  
 
@@ -240,7 +283,11 @@ set_property CONFIG_MODE SPIx4 [current_design]
 ```
 
 ## Implement
-
+1, Put the image and python code in the same folder.
+2, Excute the python script.
+3, Add the converted image file.
+       Add Sources -> Add or create design sources
+4, Using vivado tool and souce codes which is verilog HDL file and constraints file, implement.
 
 ## Reference 
 website: "FPGAボードで遊ぼう！- Basys3でVGA出力 -" https://qiita.com/Kenta11/items/34555852efdf8d8f4b0c  

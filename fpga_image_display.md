@@ -283,12 +283,12 @@ set_property CONFIG_MODE SPIx4 [current_design]
 ```
 
 ## Implement
-1, Put the image and python code in the same folder.
-2, Excute the python script.
-3, Add the converted image file.
-       Add Sources -> Add or create design sources
-4, Using vivado tool and souce codes which is verilog HDL file and constraints file, implement.
-
+1, Put the image and python code in the same folder.  
+2, Excute the python script.  
+3, Add the converted image file.  
+       Add Sources -> Add or create design sources  
+4, Using vivado tool and souce codes which is verilog HDL file and constraints file, implement.  
+  
 ## Reference 
 website: "FPGAボードで遊ぼう！- Basys3でVGA出力 -" https://qiita.com/Kenta11/items/34555852efdf8d8f4b0c  
 https://github.com/klab-aizu/m5292015_Atharv_SHARMA/blob/main/Report/Torch2HW/VGA_model.md

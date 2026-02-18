@@ -288,6 +288,14 @@ set_property CONFIG_MODE SPIx4 [current_design]
 3, Add the converted image file.  
        Add Sources -> Add or create design sources  
 4, Using vivado tool and souce codes which is verilog HDL file and constraints file, implement.  
+
+## result  
+sample.jpeg:  
+![sample](https://github.com/user-attachments/assets/7e43bc21-c72b-4bbb-863d-de19da25b257)
+->  
+image.mem:  
+
+
   
 ## Reference 
 website: "FPGAボードで遊ぼう！- Basys3でVGA出力 -" https://qiita.com/Kenta11/items/34555852efdf8d8f4b0c  

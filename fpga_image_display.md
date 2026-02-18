@@ -292,7 +292,7 @@ set_property CONFIG_MODE SPIx4 [current_design]
 Excute the python script  
 <img width="749" height="123" alt="Screenshot from 2026-02-18 15-13-09" src="https://github.com/user-attachments/assets/da205889-092b-4e31-a5dc-9110b543a51b" />  
 
-sample.jpeg:  
+sample.jpeg:3840 × 2160 pixels  
 ![sample](https://github.com/user-attachments/assets/7e43bc21-c72b-4bbb-863d-de19da25b257)  
 ->  image.mem  
 
@@ -321,7 +321,7 @@ Run Synthesis -> Run Implementation -> Generate Bitstream -> open hardware maneg
 <img width="601" height="329" alt="Screenshot from 2026-02-18 16-02-31" src="https://github.com/user-attachments/assets/a4c6bf37-a32d-405a-a88d-ef0bd53c9742" />  
 
 ### 5.Display the image
-The displayed image(.jpeg) 
+The displayed image(.jpeg and 3840 × 2160 pixels) 
 ![sample](https://github.com/user-attachments/assets/7e43bc21-c72b-4bbb-863d-de19da25b257)  
 ->  
 The below image is the result.

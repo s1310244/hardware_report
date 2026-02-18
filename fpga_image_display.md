@@ -327,6 +327,11 @@ The displayed image(.jpeg and 3840 × 2160 pixels)
 The below image is the result.
 ![IMG_2116](https://github.com/user-attachments/assets/56e7aa7c-15d0-497f-bfa5-1d149dfc9320)  
 
+### 6.other case
+This site(https://resizebox.com/ja/resize-image-to-640x480) is to resize image(jpeg) to 640*480.  
+I tried to display a image resized using the site.  
+A image that has been resized to 640*480 using that site to resize the image used earlier  
+
 ## Reference 
 website: "FPGAボードで遊ぼう！- Basys3でVGA出力 -" https://qiita.com/Kenta11/items/34555852efdf8d8f4b0c  
 https://github.com/klab-aizu/m5292015_Atharv_SHARMA/blob/main/Report/Torch2HW/VGA_model.md

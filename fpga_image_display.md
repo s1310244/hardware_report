@@ -188,8 +188,6 @@ module vga_sync (
 endmodule
 ```
 
-### Module for extracting images from SRAM
-
 ### memory_block.v
 ```
 module memory_block (
@@ -289,14 +287,46 @@ set_property CONFIG_MODE SPIx4 [current_design]
        Add Sources -> Add or create design sources  
 4, Using vivado tool and souce codes which is verilog HDL file and constraints file, implement.  
 
-## result  
+## Result  
+### 1.converting .mem to jpeg using python script
+Excute the python script  
+<img width="749" height="123" alt="Screenshot from 2026-02-18 15-13-09" src="https://github.com/user-attachments/assets/da205889-092b-4e31-a5dc-9110b543a51b" />  
+
 sample.jpeg:  
-![sample](https://github.com/user-attachments/assets/7e43bc21-c72b-4bbb-863d-de19da25b257)
+![sample](https://github.com/user-attachments/assets/7e43bc21-c72b-4bbb-863d-de19da25b257)  
+->  image.mem  
+
+### 2.create project in vivado
+project name: jpeg_converter  
+<img width="803" height="712" alt="Screenshot from 2026-02-18 15-25-27" src="https://github.com/user-attachments/assets/e88474f2-1ccb-4652-aadf-60bcbdee424f" />  
+<img width="803" height="712" alt="Screenshot from 2026-02-18 15-25-53" src="https://github.com/user-attachments/assets/e7fdcf02-2135-4da0-80ea-a56b93966ae3" />  
+<img width="803" height="712" alt="Screenshot from 2026-02-18 15-28-55" src="https://github.com/user-attachments/assets/842e5913-da12-4a60-bee9-af679d4f5dee" />  
+Create source file  
+Create constraint file  
+<img width="506" height="459" alt="Screenshot from 2026-02-18 15-41-56" src="https://github.com/user-attachments/assets/652f243f-9cb1-4a1a-b838-7adecf578a17" />  
+
+### 3.Add the converted image file
+Add Sources -> Add or create design sources 
+Added source image: image.mem  
+<img width="235" height="191" alt="Screenshot from 2026-02-18 15-45-13" src="https://github.com/user-attachments/assets/e9eb59bb-6971-471b-9412-d72a45ad2b74" />  
+<img width="853" height="594" alt="Screenshot from 2026-02-18 15-45-42" src="https://github.com/user-attachments/assets/32598ee4-4597-4778-a69f-589417f68b5c" />  
+<img width="853" height="594" alt="Screenshot from 2026-02-18 15-50-04" src="https://github.com/user-attachments/assets/cd94bc23-bb28-494d-ae0e-ba1b5568de78" />  
+
+### 4.run FPGA
+Connect FPGA  
+![IMG_2115](https://github.com/user-attachments/assets/f12cd510-32a7-492e-b1d0-6ce7eeb4754a)  
+
+in vivado,  
+Run Synthesis -> Run Implementation -> Generate Bitstream -> open hardware maneger -> open target -> Auto Connect -> program device  
+<img width="601" height="329" alt="Screenshot from 2026-02-18 16-02-31" src="https://github.com/user-attachments/assets/a4c6bf37-a32d-405a-a88d-ef0bd53c9742" />  
+
+### 5.Display the image
+The displayed image(.jpeg) 
+![sample](https://github.com/user-attachments/assets/7e43bc21-c72b-4bbb-863d-de19da25b257)  
 ->  
-image.mem:  
+The below image is the result.
+![IMG_2116](https://github.com/user-attachments/assets/56e7aa7c-15d0-497f-bfa5-1d149dfc9320)  
 
-
-  
 ## Reference 
 website: "FPGAボードで遊ぼう！- Basys3でVGA出力 -" https://qiita.com/Kenta11/items/34555852efdf8d8f4b0c  
 https://github.com/klab-aizu/m5292015_Atharv_SHARMA/blob/main/Report/Torch2HW/VGA_model.md

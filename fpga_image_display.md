@@ -331,6 +331,10 @@ The below image is the result.
 This site(https://resizebox.com/ja/resize-image-to-640x480) is to resize image(jpeg) to 640*480.  
 I tried to display a image resized using the site.  
 A image that has been resized to 640*480 using that site to resize the image used earlier  
+![sample_640x480](https://github.com/user-attachments/assets/de7c26e1-42dc-4ca7-bf76-e5b1286c676d)  
+
+The result  
+
 
 ## Reference 
 website: "FPGAボードで遊ぼう！- Basys3でVGA出力 -" https://qiita.com/Kenta11/items/34555852efdf8d8f4b0c  

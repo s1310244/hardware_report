@@ -325,7 +325,8 @@ The displayed image(.jpeg and 3840 × 2160 pixels)
 ![sample](https://github.com/user-attachments/assets/7e43bc21-c72b-4bbb-863d-de19da25b257)  
 ->  
 The below image is the result.
-![IMG_2116](https://github.com/user-attachments/assets/56e7aa7c-15d0-497f-bfa5-1d149dfc9320)  
+![IMG_2117](https://github.com/user-attachments/assets/6771cff4-cbac-469e-b443-21285c44f1ad)
+
 
 ### 6.other case
 This site(https://resizebox.com/ja/resize-image-to-640x480) is to resize image(jpeg) to 640*480.  

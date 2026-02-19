@@ -212,6 +212,12 @@ endmodule
 ```
 
 
+```
+    initial begin
+        $readmemh("image.mem", mem);
+    end
+```
+This statement will load the image file (image.mem) into the FPGA memory.
 
 ## Constraint file
 ```
